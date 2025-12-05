@@ -1,5 +1,3 @@
-# Cihangir-Kankaya-Portfolio
-My iOS Development Projects
 
 # Merhaba, Ben Cihangir 👋
 ## iOS Developer | Swift & SwiftUI
