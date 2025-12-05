@@ -1,5 +1,5 @@
 
-# Merhaba, Ben Cihangir 👋
+# Merhaba, Ben Cihangir
 ## iOS Developer | Swift & SwiftUI
 
 Yazılım geliştirme yolculuğumdaki projelerimi ve yetkinliklerimi içeren portfolyomu aşağıdaki bağlantıdan inceleyebilirsiniz.
