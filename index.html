@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cihangir Kankaya | iOS Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #000000;
+            --card-bg: #1c1c1e;
+            --text-primary: #f5f5f7;
+            --text-secondary: #86868b;
+            --accent: #0a84ff;
+            --glass: rgba(28, 28, 30, 0.6);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .logo { 
+            font-weight: 700; 
+            font-size: 1.2rem; 
+            letter-spacing: -0.5px;
+            text-decoration: none; 
+            color: var(--text-primary);
+            cursor: pointer; 
+            transition: opacity 0.3s ease;
+        }
+        
+        .logo:hover {
+            opacity: 0.7;
+        }
+        
+        .nav-links a {
+            margin-left: 30px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .btn-download {
+            background: var(--text-primary);
+            color: #000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .btn-download:hover { opacity: 0.9; transform: scale(1.05); }
+
+        .hero {
+            height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #000 70%);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            background: linear-gradient(180deg, #fff, #666);
+            -webkit-background-clip: text;
+            background-clip: text; 
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; }
+        
+        .section-header { margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 10px; }
+        .section-header p { color: var(--text-secondary); }
+
+        .featured-project {
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 40px;
+            margin-bottom: 80px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .project-info { margin-bottom: 30px; }
+        .project-info h3 { font-size: 2rem; margin-bottom: 10px; }
+        .project-info p { color: var(--text-secondary); max-width: 800px; margin-bottom: 20px; }
+
+        .tech-stack { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+        .tag {
+            background: rgba(255,255,255,0.1);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        .gallery-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 0 20px; 
+        }
+
+        .gallery-container {
+            width: 100%;
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; 
+        }
+        .gallery-container::-webkit-scrollbar { display: none; }
+
+        .gallery-item {
+            flex: 0 0 calc((100% - 60px) / 4);
+            
+            scroll-snap-align: start;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .gallery-item:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        .gallery-item img { width: 100%; height: auto; display: block; }
+
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            
+            width: 50px; 
+            height: 50px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            
+            background: rgba(255, 255, 255, 0.1); 
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            
+            cursor: pointer;
+            z-index: 20; 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+            
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            font-size: 1.2rem;
+        }
+
+        .scroll-btn:hover { 
+            background: rgba(255, 255, 255, 0.3); 
+            border-color: rgba(255, 255, 255, 0.5);
+            color: #fff; 
+            
+            transform: translateY(-50%) scale(1.1); 
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); 
+        }
+
+        .scroll-btn.left { 
+            left: -35px; 
+        }
+        
+        .scroll-btn.right { 
+            right: -35px; 
+        }
+
+
+        .grid-projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+        }
+
+        .compact-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 30px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .compact-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .compact-gallery img {
+            width: 100%;
+            border-radius: 12px;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .compact-gallery img:hover { transform: scale(1.05); }
+
+        .contact-section { text-align: center; padding: 100px 20px; background: #050505; }
+        .social-links { font-size: 2rem; margin-top: 30px; }
+        .social-links a { color: var(--text-primary); margin: 0 20px; transition: 0.3s; }
+        .social-links a:hover { color: var(--accent); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3rem; }
+            .section { padding: 60px 20px; }
+            
+            .gallery-item { flex: 0 0 260px; }
+            
+            .grid-projects { grid-template-columns: 1fr; }
+            header { padding: 20px; }
+            .nav-links { display: none; }
+            .scroll-btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">CK.</a>
+        
+        <div class="nav-links">
+            <a href="#featured">Projeler</a>
+            <a href="#about">Hakkımda</a>
+            <a href="#contact">İletişim</a>
+        </div>
+        <a href="portfolio.pdf" class="btn-download" target="_blank"><i class="fas fa-file-pdf"></i> PDF İndir</a>
+    </header>
+
+    <section class="hero">
+        <h1>Cihangir Kankaya</h1>
+        <p>iOS Developer | Swift & SwiftUI</p>
+        <p style="font-size: 1rem; color: #666; margin-top: -30px;">Modern, sürdürülebilir ve yüksek performanslı uygulamalar.</p>
+    </section>
+
+    <section id="featured" class="section">
+        <div class="section-header">
+            <h2>Öne Çıkan Projeler</h2>
+            <p>Uçtan uca geliştirdiğim kapsamlı iOS uygulamaları.</p>
+        </div>
+
+        <div class="featured-project">
+            <div class="project-info">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+                    <h3>Swift Market</h3>
+                    <a href="https://github.com/cihangirk-dev/SwiftMarket" target="_blank" style="color:#fff; text-decoration:none;"><i class="fab fa-github"></i> Kaynağı Gör</a>
+                </div>
+                <p>Güvenli kullanıcı girişi, dinamik ürün filtreleme, sepet yönetimi ve favori listesi özelliklerine sahip, modern arayüzlü kapsamlı bir e-ticaret uygulaması. MVVM mimarisi ve SwiftData kullanılarak geliştirildi.</p>
+                <div class="tech-stack">
+                    <span class="tag">SwiftUI</span>
+                    <span class="tag">MVVM</span>
+                    <span class="tag">SwiftData</span>
+                    <span class="tag">URLSession</span>
+                    <span class="tag">Kingfisher</span>
+                </div>
+            </div>
+            
+            <div class="gallery-wrapper">
+                <button class="scroll-btn left" onclick="scrollGallery(this, -300)"><i class="fas fa-chevron-left"></i></button>
+                
+                <div class="gallery-container">
+                    <div class="gallery-item"><img src="assets/swift_1.png" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/swift_2.png" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/swift_3.png" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/swift_4.png" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/swift_5.png" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/swift_6.png" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/swift_7.png" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/swift_8.png" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/swift_9.png" loading="lazy"></div>
+                </div>
+
+                <button class="scroll-btn right" onclick="scrollGallery(this, 300)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <div class="featured-project">
+            <div class="project-info">
+                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+                    <h3>Movie App</h3>
+                    <a href="https://github.com/cihangirk-dev/MovieApp" target="_blank" style="color:#fff; text-decoration:none;"><i class="fab fa-github"></i> Kaynağı Gör</a>
+                </div>
+                <p>TMDB API altyapısını kullanan film keşif platformu. Firebase Authentication ile güvenli giriş ve Firestore ile bulut tabanlı favori listesi senkronizasyonu sağlar.</p>
+                <div class="tech-stack">
+                    <span class="tag">SwiftUI</span>
+                    <span class="tag">Firebase Auth</span>
+                    <span class="tag">Firestore</span>
+                    <span class="tag">REST API</span>
+                    <span class="tag">SDWebImage</span>
+                </div>
+            </div>
+            
+            <div class="gallery-wrapper">
+                <button class="scroll-btn left" onclick="scrollGallery(this, -300)"><i class="fas fa-chevron-left"></i></button>
+                
+                <div class="gallery-container">
+                    <div class="gallery-item"><img src="assets/movie_1.png" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/movie_2.png" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/movie_3.png" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/movie_4.png" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/movie_5.png" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/movie_6.png" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/movie_7.png" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/movie_8.png" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/movie_9.png" loading="lazy"></div>
+                </div>
+                
+                <button class="scroll-btn right" onclick="scrollGallery(this, 300)"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2>Diğer Çalışmalar</h2>
+        </div>
+        <div class="grid-projects">
+            
+            <div class="compact-card">
+                <h3>Travel Book</h3>
+                <p style="color:#888; font-size:0.9rem; margin:10px 0;">Konum tabanlı seyahat günlüğü. MapKit ve CoreLocation ile harita üzerinde pinleme ve not alma.</p>
+                <div class="tech-stack">
+                    <span class="tag">MapKit</span>
+                    <span class="tag">CoreLocation</span>
+                    <span class="tag">SwiftData</span>
+                </div>
+                <div class="compact-gallery">
+                    <img src="assets/travel_1.png">
+                    <img src="assets/travel_2.png">
+                    <img src="assets/travel_3.png">
+                </div>
+                <div style="margin-top:20px; text-align:right;">
+                    <a href="https://github.com/cihangirk-dev/TravelBook" target="_blank" style="color:var(--accent); text-decoration:none;">GitHub'da İncele →</a>
+                </div>
+            </div>
+
+            <div class="compact-card">
+                <h3>Art Book</h3>
+                <p style="color:#888; font-size:0.9rem; margin:10px 0;">Sanat eserleri arşivi. Görselleri ve detayları cihazda saklayan Core Data tabanlı uygulama.</p>
+                <div class="tech-stack">
+                    <span class="tag">UIKit</span>
+                    <span class="tag">Core Data</span>
+                    <span class="tag">ImagePicker</span>
+                </div>
+                <div class="compact-gallery">
+                    <img src="assets/art_1.png">
+                    <img src="assets/art_2.png">
+                    <img src="assets/art_3.png">
+                </div>
+                <div style="margin-top:20px; text-align:right;">
+                    <a href="https://github.com/cihangirk-dev/ArtBook" target="_blank" style="color:var(--accent); text-decoration:none;">GitHub'da İncele →</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="about" class="section" style="max-width: 800px; text-align:center;">
+        <h2>Hakkımda</h2>
+        <p style="font-size:1.1rem; color:#ccc; line-height:1.8;">
+            Swift ve SwiftUI ile iOS uygulamaları geliştiren bir iOS geliştiricisiyim. 
+            Modern Apple teknolojileri, temiz kod prensipleri ve sürdürülebilir mimari yapılarla çalışıyorum.
+            MVVM mimarisi, REST API entegrasyonları, Firebase servisleri ve yerel veri yönetimi konularında projeler geliştirdim. 
+            Kullanıcı deneyimi, performans ve ölçeklenebilirlik odaklı uygulamalar üretmeyi önemsiyorum.
+            Kendimi sürekli geliştirmeye açık, yeni teknolojileri yakından takip eden bir geliştiriciyim.
+        </p>
+    </section>
+
+    <footer id="contact" class="contact-section">
+        <h2 style="color:#fff;">Benimle İletişime Geçin</h2>
+        <p style="color:#888;">Yeni projeler ve fırsatlar için her zaman buradayım.</p>
+        
+        <div class="social-links">
+            <a href="mailto:cihangirkankaya@gmail.com"><i class="fas fa-envelope"></i></a>
+            <a href="https://github.com/cihangirk-dev" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/cihangir-kankaya-05168127b/" target="_blank"><i class="fab fa-linkedin"></i></a>
+        </div>
+        
+        <p style="margin-top: 50px; font-size: 0.8rem; color:#444;">© 2025 Cihangir Kankaya. Tüm hakları saklıdır.</p>
+    </footer>
+
+    <script>
+        function scrollGallery(button, amount) {
+            const wrapper = button.closest('.gallery-wrapper');
+            const container = wrapper.querySelector('.gallery-container');
+            container.scrollBy({
+                left: amount,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+
+</body>
+</html>
