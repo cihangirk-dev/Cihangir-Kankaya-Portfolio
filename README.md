@@ -4,7 +4,7 @@
 
 Yazılım geliştirme yolculuğumdaki projelerimi ve yetkinliklerimi içeren portfolyomu aşağıdaki bağlantıdan inceleyebilirsiniz.
 
-### 📄 [Portfolyomu Görüntüle](portfolyo.pdf)
+### 📄 [Portfolyomu Görüntüle](portfolio.pdf)
 
 ---
 **İletişim:** [LinkedIn Profilim](https://www.linkedin.com/in/cihangir-kankaya-05168127b/)
