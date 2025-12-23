@@ -252,8 +252,12 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 3rem; }
             .section { padding: 60px 20px; }
+
+            .featured-project {
+                padding: 20px 15px;
+            }
             
-            .gallery-item { flex: 0 0 290px; }
+            .gallery-item { flex: 0 0 280px; }
             
             .grid-projects { grid-template-columns: 1fr; }
             header { padding: 20px; }
@@ -436,6 +440,13 @@
                 behavior: 'smooth'
             });
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const containers = document.querySelectorAll('.gallery-container');
+            containers.forEach(container => {
+                container.scrollLeft = 0;
+            });
+        });
     </script>
 
 </body>
