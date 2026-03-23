@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cihangir Kankaya | iOS Portfolio</title>
+    <meta name="description" content="Cihangir Kankaya — Swift ve SwiftUI ile iOS uygulamaları geliştiren Junior iOS Developer portfolyosu.">
+    <meta property="og:title" content="Cihangir Kankaya | iOS Portfolio">
+    <meta property="og:description" content="Swift ve SwiftUI ile geliştirilen iOS projeleri. Subvisor, Swift Market, Movie App ve daha fazlası.">
+    <meta property="og:type" content="website">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -50,32 +54,26 @@
             color: var(--text-primary);
             cursor: pointer; 
             transition: opacity 0.3s ease;
+            flex-shrink: 0;
         }
-        
-        .logo:hover {
-            opacity: 0.7;
+        .logo:hover { opacity: 0.7; }
+
+        .nav-links {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 30px;
         }
         
         .nav-links a {
-            margin-left: 30px;
             color: var(--text-secondary);
             text-decoration: none;
             font-size: 0.9rem;
             transition: 0.3s;
         }
         .nav-links a:hover { color: var(--text-primary); }
-
-        .btn-download {
-            background: var(--text-primary);
-            color: #000;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-        .btn-download:hover { opacity: 0.9; transform: scale(1.05); }
 
         .hero {
             height: 90vh;
@@ -120,9 +118,79 @@
             border: 1px solid rgba(255,255,255,0.05);
         }
 
+        /* Subvisor özel - hafif mavi/mor glow border */
+        .featured-project.subvisor {
+            border: 1px solid rgba(10, 132, 255, 0.25);
+            box-shadow: 0 0 60px rgba(10, 132, 255, 0.07);
+        }
+
         .project-info { margin-bottom: 30px; }
         .project-info h3 { font-size: 2rem; margin-bottom: 10px; }
         .project-info p { color: var(--text-secondary); max-width: 800px; margin-bottom: 20px; }
+
+        .project-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .project-meta-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        /* App Store — pasif link */
+        .appstore-link-disabled {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: default;
+            opacity: 0.45;
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 6px 14px;
+            border-radius: 20px;
+            user-select: none;
+        }
+        .appstore-link-disabled i { font-size: 1rem; }
+
+        /* App Store rozeti */
+        .appstore-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #1c1c1e, #2c2c2e);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: #f5f5f7;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.2px;
+        }
+        .appstore-badge i {
+            color: #fff;
+            font-size: 0.85rem;
+        }
+        .appstore-badge .dot {
+            width: 6px;
+            height: 6px;
+            background: #30d158;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
 
         .tech-stack { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
         .tag {
@@ -155,7 +223,6 @@
 
         .gallery-item {
             flex: 0 0 calc((100% - 60px) / 4);
-            
             scroll-snap-align: start;
             border-radius: 20px;
             overflow: hidden;
@@ -173,26 +240,20 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            
             width: 50px; 
             height: 50px;
             border-radius: 50%;
             flex-shrink: 0;
-            
             background: rgba(255, 255, 255, 0.1); 
             border: 1px solid rgba(255, 255, 255, 0.15);
             color: #fff;
-            
             display: flex;
             align-items: center;
             justify-content: center;
-            
             cursor: pointer;
             z-index: 20; 
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            
             transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
-            
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             font-size: 1.2rem;
@@ -202,19 +263,12 @@
             background: rgba(255, 255, 255, 0.3); 
             border-color: rgba(255, 255, 255, 0.5);
             color: #fff; 
-            
             transform: translateY(-50%) scale(1.1); 
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); 
         }
 
-        .scroll-btn.left { 
-            left: -35px; 
-        }
-        
-        .scroll-btn.right { 
-            right: -35px; 
-        }
-
+        .scroll-btn.left { left: -35px; }
+        .scroll-btn.right { right: -35px; }
 
         .grid-projects {
             display: grid;
@@ -252,13 +306,8 @@
         @media (max-width: 768px) {
             .hero h1 { font-size: 3rem; }
             .section { padding: 60px 20px; }
-
-            .featured-project {
-                padding: 20px 15px;
-            }
-            
+            .featured-project { padding: 20px 15px; }
             .gallery-item { flex: 0 0 290px; }
-            
             .grid-projects { grid-template-columns: 1fr; }
             header { padding: 20px; }
             .nav-links { display: none; }
@@ -276,7 +325,6 @@
             <a href="#about">Hakkımda</a>
             <a href="#contact">İletişim</a>
         </div>
-        <a href="portfolio.pdf" class="btn-download" target="_blank"><i class="fas fa-file-pdf"></i> PDF İndir</a>
     </header>
 
     <section class="hero">
@@ -291,11 +339,63 @@
             <p>Uçtan uca geliştirdiğim kapsamlı iOS uygulamaları.</p>
         </div>
 
+        <!-- SUBVISOR -->
+        <div class="featured-project subvisor">
+            <div class="project-info">
+                <div class="project-meta">
+                    <div class="project-meta-left">
+                        <h3>Subvisor</h3>
+                        <span class="appstore-badge">
+                            <span class="dot"></span>
+                            <i class="fab fa-apple"></i>
+                            App Store'a Geliyor
+                        </span>
+                    </div>
+                    <span class="appstore-link-disabled" title="Yakında yayında">
+                        <i class="fab fa-apple"></i> App Store'da İncele
+                    </span>
+                </div>
+                <p>Tüm aboneliklerinizi tek bir yerden yönetmenizi sağlayan akıllı bir abonelik takip uygulaması. Netflix, Spotify, AWS gibi popüler servisleri yerleşik kütüphaneden ekleyebilir ya da istediğiniz aboneliği manuel olarak tanımlayabilirsiniz. Ödeme günlerine özel hatırlatıcılar, kategori bazlı harcama istatistikleri ve takvim görünümü ile aboneliklerinizin tam kontrolü elinizde.</p>
+                <div class="tech-stack">
+                    <span class="tag">SwiftUI</span>
+                    <span class="tag">SwiftData</span>
+                    <span class="tag">CloudKit</span>
+                    <span class="tag">UserNotifications</span>
+                    <span class="tag">Charts</span>
+                    <span class="tag">StoreKit</span>
+                </div>
+            </div>
+            
+            <div class="gallery-wrapper">
+                <button class="scroll-btn left" onclick="scrollGallery(this, -300)" aria-label="Sola kaydır"><i class="fas fa-chevron-left"></i></button>
+                
+                <div class="gallery-container">
+                    <div class="gallery-item"><img src="assets/home.png" alt="Subvisor ana ekranı — abonelik listesi ve toplam harcama" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/calender.png" alt="Subvisor — takvim görünümü ve aylık harcama" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/calender2.png" alt="Subvisor — takvimde gün detayı ve ödemeler" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/stat.png" alt="Subvisor — kategori bazlı istatistikler ve donut grafik" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/stat2.png" alt="Subvisor — ek istatistikler" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/settings.png" alt="Subvisor — ayarlar ekranı" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/settings2.png" alt="Subvisor — ek ayarlar ekranı" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/add.png" alt="Subvisor — popüler servis kütüphanesi (Eğlence)" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/addManuel.png" alt="Subvisor — manuel abonelik ekleme formu" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/addManuel2.png" alt="Subvisor — hatırlatıcılar ve kaydetme" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/detail.png" alt="Subvisor — abonelik detay ekranı (Claude Pro)" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/detail2.png" alt="Subvisor — abonelik detayı ve ödendi işareti" loading="lazy"></div>
+                </div>
+
+                <button class="scroll-btn right" onclick="scrollGallery(this, 300)" aria-label="Sağa kaydır"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <!-- SWIFT MARKET -->
         <div class="featured-project">
             <div class="project-info">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
-                    <h3>Swift Market</h3>
-                    <a href="https://github.com/cihangirk-dev/SwiftMarket" target="_blank" style="color:#fff; text-decoration:none;"><i class="fab fa-github"></i> Kaynağı Gör</a>
+                <div class="project-meta">
+                    <div class="project-meta-left">
+                        <h3>Swift Market</h3>
+                    </div>
+                    <a href="https://github.com/cihangirk-dev/SwiftMarket" target="_blank" style="color:#fff; text-decoration:none; font-size:0.9rem;"><i class="fab fa-github"></i> Kaynağı Gör</a>
                 </div>
                 <p>Güvenli kullanıcı girişi, dinamik ürün filtreleme, sepet yönetimi ve favori listesi özelliklerine sahip, modern arayüzlü kapsamlı bir e-ticaret uygulaması. MVVM mimarisi ve SwiftData kullanılarak geliştirildi.</p>
                 <div class="tech-stack">
@@ -308,29 +408,32 @@
             </div>
             
             <div class="gallery-wrapper">
-                <button class="scroll-btn left" onclick="scrollGallery(this, -300)"><i class="fas fa-chevron-left"></i></button>
+                <button class="scroll-btn left" onclick="scrollGallery(this, -300)" aria-label="Sola kaydır"><i class="fas fa-chevron-left"></i></button>
                 
                 <div class="gallery-container">
-                    <div class="gallery-item"><img src="assets/swift_1.png" loading="lazy"></div>
-                    <div class="gallery-item"><img src="assets/swift_2.png" loading="lazy"></div>
-                    <div class="gallery-item"><img src="assets/swift_3.png" loading="lazy"></div>
-                    <div class="gallery-item"><img src="assets/swift_4.png" loading="lazy"></div>
-                    <div class="gallery-item"><img src="assets/swift_5.png" loading="lazy"></div>
-                    <div class="gallery-item"><img src="assets/swift_6.png" loading="lazy"></div>
-                    <div class="gallery-item"><img src="assets/swift_7.png" loading="lazy"></div>
-                    <div class="gallery-item"><img src="assets/swift_8.png" loading="lazy"></div>
-                    <div class="gallery-item"><img src="assets/swift_9.png" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/swift_1.png" alt="Swift Market ana ekranı" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/swift_2.png" alt="Swift Market ürün listesi" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/swift_3.png" alt="Swift Market ürün filtreleme" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/swift_4.png" alt="Swift Market sepet ekranı" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/swift_5.png" alt="Swift Market favori ürünler" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/swift_6.png" alt="Swift Market ürün detayı" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/swift_7.png" alt="Swift Market profil ekranı" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/swift_8.png" alt="Swift Market giriş ekranı" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/swift_9.png" alt="Swift Market arama ekranı" loading="lazy"></div>
                 </div>
 
-                <button class="scroll-btn right" onclick="scrollGallery(this, 300)"><i class="fas fa-chevron-right"></i></button>
+                <button class="scroll-btn right" onclick="scrollGallery(this, 300)" aria-label="Sağa kaydır"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
 
+        <!-- MOVIE APP -->
         <div class="featured-project">
             <div class="project-info">
-                <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;">
-                    <h3>Movie App</h3>
-                    <a href="https://github.com/cihangirk-dev/MovieApp" target="_blank" style="color:#fff; text-decoration:none;"><i class="fab fa-github"></i> Kaynağı Gör</a>
+                <div class="project-meta">
+                    <div class="project-meta-left">
+                        <h3>Movie App</h3>
+                    </div>
+                    <a href="https://github.com/cihangirk-dev/MovieApp" target="_blank" style="color:#fff; text-decoration:none; font-size:0.9rem;"><i class="fab fa-github"></i> Kaynağı Gör</a>
                 </div>
                 <p>TMDB API altyapısını kullanan film keşif platformu. Firebase Authentication ile güvenli giriş ve Firestore ile bulut tabanlı favori listesi senkronizasyonu sağlar.</p>
                 <div class="tech-stack">
@@ -343,25 +446,26 @@
             </div>
             
             <div class="gallery-wrapper">
-                <button class="scroll-btn left" onclick="scrollGallery(this, -300)"><i class="fas fa-chevron-left"></i></button>
+                <button class="scroll-btn left" onclick="scrollGallery(this, -300)" aria-label="Sola kaydır"><i class="fas fa-chevron-left"></i></button>
                 
                 <div class="gallery-container">
-                    <div class="gallery-item"><img src="assets/movie_1.png" loading="lazy"></div>
-                    <div class="gallery-item"><img src="assets/movie_2.png" loading="lazy"></div>
-                    <div class="gallery-item"><img src="assets/movie_3.png" loading="lazy"></div>
-                    <div class="gallery-item"><img src="assets/movie_4.png" loading="lazy"></div>
-                    <div class="gallery-item"><img src="assets/movie_5.png" loading="lazy"></div>
-                    <div class="gallery-item"><img src="assets/movie_6.png" loading="lazy"></div>
-                    <div class="gallery-item"><img src="assets/movie_7.png" loading="lazy"></div>
-                    <div class="gallery-item"><img src="assets/movie_8.png" loading="lazy"></div>
-                    <div class="gallery-item"><img src="assets/movie_9.png" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/movie_1.png" alt="Movie App ana ekranı" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/movie_2.png" alt="Movie App film listesi" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/movie_3.png" alt="Movie App film detayı" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/movie_4.png" alt="Movie App arama ekranı" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/movie_5.png" alt="Movie App favoriler" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/movie_6.png" alt="Movie App benzer filmler" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/movie_7.png" alt="Movie App giriş ekranı" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/movie_8.png" alt="Movie App kayıt ekranı" loading="lazy"></div>
+                    <div class="gallery-item"><img src="assets/movie_9.png" alt="Movie App profil ekranı" loading="lazy"></div>
                 </div>
                 
-                <button class="scroll-btn right" onclick="scrollGallery(this, 300)"><i class="fas fa-chevron-right"></i></button>
+                <button class="scroll-btn right" onclick="scrollGallery(this, 300)" aria-label="Sağa kaydır"><i class="fas fa-chevron-right"></i></button>
             </div>
         </div>
     </section>
 
+    <!-- DİĞER ÇALIŞMALAR -->
     <section class="section">
         <div class="section-header">
             <h2>Diğer Çalışmalar</h2>
@@ -377,9 +481,9 @@
                     <span class="tag">SwiftData</span>
                 </div>
                 <div class="compact-gallery">
-                    <img src="assets/travel_1.png">
-                    <img src="assets/travel_2.png">
-                    <img src="assets/travel_3.png">
+                    <img src="assets/travel_1.png" alt="Travel Book ana ekranı">
+                    <img src="assets/travel_2.png" alt="Travel Book harita ekranı">
+                    <img src="assets/travel_3.png" alt="Travel Book yer ekleme ekranı">
                 </div>
                 <div style="margin-top:20px; text-align:right;">
                     <a href="https://github.com/cihangirk-dev/TravelBook" target="_blank" style="color:var(--accent); text-decoration:none;">GitHub'da İncele →</a>
@@ -395,9 +499,9 @@
                     <span class="tag">ImagePicker</span>
                 </div>
                 <div class="compact-gallery">
-                    <img src="assets/art_1.png">
-                    <img src="assets/art_2.png">
-                    <img src="assets/art_3.png">
+                    <img src="assets/art_1.png" alt="Art Book ana ekranı">
+                    <img src="assets/art_2.png" alt="Art Book eser ekleme ekranı">
+                    <img src="assets/art_3.png" alt="Art Book eser detayı">
                 </div>
                 <div style="margin-top:20px; text-align:right;">
                     <a href="https://github.com/cihangirk-dev/ArtBook" target="_blank" style="color:var(--accent); text-decoration:none;">GitHub'da İncele →</a>
@@ -407,6 +511,7 @@
         </div>
     </section>
 
+    <!-- HAKKIMDA -->
     <section id="about" class="section" style="max-width: 800px; text-align:center;">
         <h2>Hakkımda</h2>
         <p style="font-size:1.1rem; color:#ccc; line-height:1.8;">
@@ -418,36 +523,50 @@
         </p>
     </section>
 
+    <!-- İLETİŞİM -->
     <footer id="contact" class="contact-section">
         <h2 style="color:#fff;">Benimle İletişime Geçin</h2>
         <p style="color:#888;">Yeni projeler ve fırsatlar için her zaman buradayım.</p>
         
         <div class="social-links">
-            <a href="mailto:cihangirkankaya@gmail.com"><i class="fas fa-envelope"></i></a>
-            <a href="https://github.com/cihangirk-dev" target="_blank"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/cihangirkankaya" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="/cdn-cgi/l/email-protection#ec8f85848d828b859e878d82878d958dac8b818d8580c28f8381" aria-label="E-posta gönder"><i class="fas fa-envelope"></i></a>
+            <a href="https://github.com/cihangirk-dev" target="_blank" aria-label="GitHub profili"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/cihangirkankaya" target="_blank" aria-label="LinkedIn profili"><i class="fab fa-linkedin"></i></a>
         </div>
         
-        <p style="margin-top: 50px; font-size: 0.8rem; color:#444;">© 2025 Cihangir Kankaya. Tüm hakları saklıdır.</p>
+        <p style="margin-top: 50px; font-size: 0.8rem; color:#444;">© 2026 Cihangir Kankaya. Tüm hakları saklıdır.</p>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         function scrollGallery(button, amount) {
             const wrapper = button.closest('.gallery-wrapper');
             const container = wrapper.querySelector('.gallery-container');
-            container.scrollBy({
-                left: amount,
-                behavior: 'smooth'
-            });
+            container.scrollBy({ left: amount, behavior: 'smooth' });
         }
 
-        document.addEventListener("DOMContentLoaded", function() {
-            const containers = document.querySelectorAll('.gallery-container');
-            containers.forEach(container => {
-                container.scrollLeft = 0;
+            function scrollGallery(button, amount) {
+                const wrapper = button.closest('.gallery-wrapper');
+                const container = wrapper.querySelector('.gallery-container');
+                container.scrollBy({ left: amount, behavior: 'smooth' });
+            }
+    
+            document.addEventListener("DOMContentLoaded", function() {
+                const containers = document.querySelectorAll('.gallery-container');
+                containers.forEach(container => {
+                    const wrapper = container.closest('.gallery-wrapper');
+                    const leftBtn = wrapper.querySelector('.scroll-btn.left');
+                    const rightBtn = wrapper.querySelector('.scroll-btn.right');
+    
+                    function updateButtons() {
+                        if (leftBtn) leftBtn.style.opacity = container.scrollLeft > 10 ? '1' : '0.3';
+                        if (rightBtn) {
+                            const atEnd = container.scrollLeft + container.clientWidth >= container.scrollWidth - 10;
+                            rightBtn.style.opacity = atEnd ? '0.3' : '1';
+                        }
+                    }
+    
+                    updateButtons();
+                    container.addEventListener('scroll', updateButtons);
+                });
             });
-        });
-    </script>
-
-</body>
-</html>
+        </script>
