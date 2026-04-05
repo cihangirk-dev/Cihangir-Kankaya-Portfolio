@@ -47,6 +47,6 @@ I'm always open to new opportunities and collaborations. Feel free to reach out!
 
 - **LinkedIn:** [linkedin.com/in/cihangirkankaya](https://www.linkedin.com/in/cihangirkankaya)
 - **GitHub:** [github.com/cihangirk-dev](https://github.com/cihangirk-dev)
-- **Email:** [cihangir@example.com](mailto:cihangir@example.com)
+- **Email:** [cihangirkankaya@gmail.com](mailto:cihangirkankaya@gmail.com)
 
 ---
